@@ -319,11 +319,11 @@ export default function Home() {
             <div className="bg-gray-800/50 rounded-xl p-6 shadow-xl">
               {/* Case Title */}
               <h2 className="text-3xl font-semibold text-center text-blue-400">
-                Case {activeTab + 1}: Acquisition Samples = {results[activeTab].samples}
+                Acquisition Samples = {results[activeTab].samples}
               </h2>
 
               {/* Case Selection Tabs */}
-              <div className="flex justify-center space-x-4 mb-8">
+              <div className="flex justify-center space-x-4 mb-4">
                 {results.map((result, index) => (
                   <button
                     key={index}
@@ -338,6 +338,9 @@ export default function Home() {
                   </button>
                 ))}
               </div>
+
+              {/* IF_Max Information */}
+              <p className="text-center text-gray-400 mb-8">All parameters are based on taking IF_Max = 40 MHz</p>
 
               {results[activeTab] && (
                 <div className="space-y-8">
@@ -400,25 +403,25 @@ export default function Home() {
                   <div>
                     <h3 className="text-2xl font-semibold mb-4 text-gray-300">CHIRP Frequency Parameters</h3>
                     <div className="grid grid-cols-3 gap-4">
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">START FREQ</div>
                         <div className="text-xl">{results[activeTab].chirpFrequency.start.toFixed(2)} GHz</div>
                       </div>
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">CENTER FREQ</div>
                         <div className="text-xl">{((results[activeTab].chirpFrequency.end - results[activeTab].chirpFrequency.start) / 2 + results[activeTab].chirpFrequency.start).toFixed(2)} GHz</div>
                       </div>
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">END FREQ</div>
                         <div className="text-xl">{results[activeTab].chirpFrequency.end.toFixed(2)} GHz</div>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4 mt-4">
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">ADC BANDWIDTH</div>
                         <div className="text-xl">{results[activeTab].chirpFrequency.bandwidth.toFixed(2)} MHz</div>
                       </div>
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">FULL BANDWIDTH</div>
                         <div className="text-xl">{((results[activeTab].chirpFrequency.end - results[activeTab].chirpFrequency.start) * 1000).toFixed(2)} MHz</div>
                       </div>
@@ -512,7 +515,7 @@ export default function Home() {
                   {/* IF Bandwidth Table */}
                   <div>
                     <h3 className="text-2xl font-semibold mb-4 text-gray-300">IF Bandwidth Table</h3>
-                    <div className="bg-gray-800/50 rounded-lg p-4 max-h-64 overflow-y-auto">
+                    <div className="bg-gray-700/50 rounded-lg p-4 max-h-64 overflow-y-auto">
                       <table className="w-full">
                         <thead>
                           <tr>
