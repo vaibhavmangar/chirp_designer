@@ -205,7 +205,7 @@ export default function Home() {
                     className="fill-current text-black"
                     style={{ fontSize: '100%', fill: 'black' }}
                   >
-                    {results[activeTab]?.chirpFrequency.center.toFixed(3)*1000}
+                    {((results[activeTab]?.chirpFrequency.end - results[activeTab]?.chirpFrequency.start) / 2 + results[activeTab]?.chirpFrequency.start).toFixed(3)*1000}
                   </text>
                   <text
                     x="1.5%"
@@ -303,6 +303,14 @@ export default function Home() {
                   >
                     {results[activeTab]?.chirpFrequency.bandwidth.toFixed(2)}
                   </text>
+                  <text
+                    x="32%"
+                    y="55%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {((results[activeTab]?.chirpFrequency.end - results[activeTab]?.chirpFrequency.start) * 1000).toFixed(2)}
+                  </text>
                   
                 </svg>
               </div>
@@ -391,22 +399,28 @@ export default function Home() {
                   {/* CHIRP Frequency Parameters */}
                   <div>
                     <h3 className="text-2xl font-semibold mb-4 text-gray-300">CHIRP Frequency Parameters</h3>
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                       <div className="bg-gray-800/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">START FREQ</div>
                         <div className="text-xl">{results[activeTab].chirpFrequency.start.toFixed(2)} GHz</div>
                       </div>
                       <div className="bg-gray-800/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">CENTER FREQ</div>
-                        <div className="text-xl">{results[activeTab].chirpFrequency.center.toFixed(2)} GHz</div>
+                        <div className="text-xl">{((results[activeTab].chirpFrequency.end - results[activeTab].chirpFrequency.start) / 2 + results[activeTab].chirpFrequency.start).toFixed(2)} GHz</div>
                       </div>
                       <div className="bg-gray-800/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">END FREQ</div>
                         <div className="text-xl">{results[activeTab].chirpFrequency.end.toFixed(2)} GHz</div>
                       </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 mt-4">
                       <div className="bg-gray-800/50 rounded-lg p-4">
-                        <div className="text-gray-400 text-sm mb-1">BANDWIDTH</div>
+                        <div className="text-gray-400 text-sm mb-1">ADC BANDWIDTH</div>
                         <div className="text-xl">{results[activeTab].chirpFrequency.bandwidth.toFixed(2)} MHz</div>
+                      </div>
+                      <div className="bg-gray-800/50 rounded-lg p-4">
+                        <div className="text-gray-400 text-sm mb-1">FULL BANDWIDTH</div>
+                        <div className="text-xl">{((results[activeTab].chirpFrequency.end - results[activeTab].chirpFrequency.start) * 1000).toFixed(2)} MHz</div>
                       </div>
                     </div>
                   </div>

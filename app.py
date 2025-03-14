@@ -114,7 +114,7 @@ class RadarSystem:
 
         print("\n\nCHIRP Frequency Parameters")
         print(f"\tStarting frequency = {sweep_frequency_start / 1e9} GHz")
-        print(f"\tCenter frequency = {(sweep_frequency_stop-sweep_frequency_start ) / 2e9} GHz")
+        print(f"\tCenter frequency = {(sweep_frequency_stop-sweep_frequency_start ) / 2e9 + sweep_frequency_start / 1e9} GHz")
         print(f"\tEnding frequency = {sweep_frequency_stop / 1e9} GHz")
         print(f"\tCHIRP ADC bandwidth = {sweep_bandwidth / 1e6} MHz")
         print(f"\tCHIRP Full bandwidth = {(sweep_frequency_stop-sweep_frequency_start ) / 1e6} MHz")
