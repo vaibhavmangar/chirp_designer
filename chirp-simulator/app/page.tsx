@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { RadarSystem } from '../lib/RadarSystem';
+import Image from 'next/image';
 
 const ACQUISITION_SAMPLES = [512, 1024, 2048];
 
@@ -17,6 +18,7 @@ export default function Home() {
 
   const [results, setResults] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState(0);
+  const [showForm, setShowForm] = useState(true);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +40,20 @@ export default function Home() {
     });
 
     setResults(results);
+    setShowForm(false);
+  };
+
+  const handleNewCalculation = () => {
+    setShowForm(true);
+    setResults([]);
+    setFormData({
+      range_res: '',
+      range_max: '',
+      velocity_max: '',
+      velocity_res: '',
+      angular_res: '',
+      frequency: ''
+    });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,102 +65,126 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white p-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto relative">
         <h1 className="text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400">
           Radar System Simulator
         </h1>
 
+        {/* New Calculation Button */}
+        {!showForm && (
+          <button
+            onClick={handleNewCalculation}
+            className="absolute top-0 right-0 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-200"
+          >
+            New Calculation
+          </button>
+        )}
+
         {/* Input Form */}
-        <div className="bg-gray-800 rounded-xl p-6 shadow-xl mb-8">
-          <h2 className="text-2xl font-semibold mb-6">Input Parameters</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">Range Resolution (m)</label>
-                <input
-                  type="number"
-                  name="range_res"
-                  value={formData.range_res}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  required
-                  step="any"
-                />
+        {showForm && (
+          <div className="bg-gray-800 rounded-xl p-6 shadow-xl mb-8">
+            <h2 className="text-2xl font-semibold mb-6">Input Parameters</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1">Range Resolution (m)</label>
+                  <input
+                    type="number"
+                    name="range_res"
+                    value={formData.range_res}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    required
+                    step="any"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Maximum Range (m)</label>
+                  <input
+                    type="number"
+                    name="range_max"
+                    value={formData.range_max}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    required
+                    step="any"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Maximum Velocity (km/hr)</label>
+                  <input
+                    type="number"
+                    name="velocity_max"
+                    value={formData.velocity_max}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    required
+                    step="any"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Velocity Resolution (km/hr)</label>
+                  <input
+                    type="number"
+                    name="velocity_res"
+                    value={formData.velocity_res}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    required
+                    step="any"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Angular Resolution (degrees)</label>
+                  <input
+                    type="number"
+                    name="angular_res"
+                    value={formData.angular_res}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    required
+                    step="any"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">Starting Frequency (GHz)</label>
+                  <input
+                    type="number"
+                    name="frequency"
+                    value={formData.frequency}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                    required
+                    step="any"
+                  />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Maximum Range (m)</label>
-                <input
-                  type="number"
-                  name="range_max"
-                  value={formData.range_max}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  required
-                  step="any"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Maximum Velocity (km/hr)</label>
-                <input
-                  type="number"
-                  name="velocity_max"
-                  value={formData.velocity_max}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  required
-                  step="any"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Velocity Resolution (km/hr)</label>
-                <input
-                  type="number"
-                  name="velocity_res"
-                  value={formData.velocity_res}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  required
-                  step="any"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Angular Resolution (degrees)</label>
-                <input
-                  type="number"
-                  name="angular_res"
-                  value={formData.angular_res}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  required
-                  step="any"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">Starting Frequency (GHz)</label>
-                <input
-                  type="number"
-                  name="frequency"
-                  value={formData.frequency}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-gray-700 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  required
-                  step="any"
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-teal-600 transition-all duration-200"
-            >
-              Calculate Results
-            </button>
-          </form>
-        </div>
+              <button
+                type="submit"
+                className="w-full py-3 bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-lg font-medium hover:from-blue-600 hover:to-teal-600 transition-all duration-200"
+              >
+                Calculate Results
+              </button>
+            </form>
+          </div>
+        )}
 
         {/* Results Display */}
-        <div className="bg-gray-800/50 rounded-xl p-6 shadow-xl">
-          {results.length > 0 ? (
-            <div className="space-y-8">
+        {results.length > 0 && (
+          <div className="space-y-8">
+            {/* Radar Diagram Image */}
+            <div className="flex justify-center mb-8">
+              <Image
+                src="/images/radar-diagram.svg"
+                alt="Radar System Diagram"
+                width={1246}
+                height={687}
+                className="rounded-lg shadow-xl"
+                priority
+              />
+            </div>
+
+            <div className="bg-gray-800/50 rounded-xl p-6 shadow-xl">
               {/* Case Title */}
               <h2 className="text-3xl font-semibold text-center text-blue-400">
                 Case {activeTab + 1}: Acquisition Samples = {results[activeTab].samples}
@@ -356,12 +396,8 @@ export default function Home() {
                 </div>
               )}
             </div>
-          ) : (
-            <div className="text-center text-gray-400 py-8">
-              Enter parameters and click Calculate to see results
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </main>
   );
