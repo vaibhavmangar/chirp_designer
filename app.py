@@ -7,8 +7,10 @@ class RadarSystem:
     N_TX_MAX = 8
     N_RX_MAX = 8
     DWELL_TIME = 2e-6  # (seconds)
-    SETUP_TIME = 1e-6  # (seconds)
+    SETTLE_TIME = 1e-6  # (seconds)
     RESET_TIME = 1e-6  # (seconds)
+    JUMPBACK_TIME = 0.3e-6  # (seconds)
+    DC_POWER_ON_DELAY_TIME = 2e-6  # (seconds)
 
     def __init__(self, acquisition_samples, range_res, range_max, velocity_max, velocity_res, angular_res, frequency):
         # User-defined inputs
@@ -54,14 +56,14 @@ class RadarSystem:
         return sweep_frequency_start, sweep_frequency_stop
 
     def calculate_velocity_max_measurable(self):
-        chirp_time_min = self.acquisition_time + self.DWELL_TIME + self.SETUP_TIME + self.RESET_TIME
+        chirp_time_min = self.acquisition_time + self.DWELL_TIME + self.SETTLE_TIME + self.RESET_TIME+ self.JUMPBACK_TIME 
         if self.velocity_max > (self.wavelength * 3.6) / (4 * chirp_time_min):
             idle_time = 0
             required_chirp_time = chirp_time_min
             velocity_max_measurable = (self.wavelength * 3.6) / (4 * required_chirp_time)
         else:
             required_chirp_time = (self.wavelength * 3.6) / (4 * self.velocity_max)
-            idle_time = required_chirp_time - (self.DWELL_TIME + self.SETUP_TIME + self.acquisition_time + self.RESET_TIME)
+            idle_time = required_chirp_time - (self.DWELL_TIME + self.SETTLE_TIME + self.acquisition_time + self.RESET_TIME + self.JUMPBACK_TIME)
             velocity_max_measurable = self.velocity_max
         return required_chirp_time, idle_time, velocity_max_measurable
 
@@ -99,6 +101,7 @@ class RadarSystem:
         memory_required = self.calculate_memory_required(no_of_chirps, required_chirp_time, nrx)
 
         print("\nRequested Parameters : \t\t\tObtained Parameters : ")
+        print("\n All parameters are based on taking IF_Max = 40 MHz")
         print(f"Range max = {self.range_max} m\t\t\tRange max = {range_max_measurable} m")
         print(f"Range res = {self.range_res} m\t\t\tRange res = {range_res_measurable:.3f} m")
         print(f"Velocity max = {self.velocity_max} km/hr \t\tVelocity max = {velocity_max_measurable:.2f} km/hr")
@@ -112,10 +115,13 @@ class RadarSystem:
         print(f"\tCHIRP bandwidth = {sweep_bandwidth / 1e6} MHz")
 
         print("\nCHIRP Timing Parameters : ")
+        print(f"\tDC power on delay time = {self.DC_POWER_ON_DELAY_TIME * 1e6:.2f} us")
         print(f"\tDwell time = {self.DWELL_TIME * 1e6:.2f} us")
-        print(f"\tSetup time = {self.SETUP_TIME * 1e6:.2f} us")
+        print(f"\tSettle time = {self.SETTLE_TIME * 1e6:.2f} us")
         print(f"\tAcquisition time = {self.acquisition_time * 1e6:.2f} us")
         print(f"\tReset time = {self.RESET_TIME * 1e6:.2f} us")
+        print(f"\tJumpback time = {self.JUMPBACK_TIME * 1e6:.2f} us")
+        
         print(f"\tIdle time = {idle_time * 1e6:.2f} us")
         print(f"\tCHIRP time = {required_chirp_time * 1e6:.2f} us")
 
@@ -123,7 +129,7 @@ class RadarSystem:
         print(f"\tFrame time = {frame_time:.2f} ms")
         print(f"\tNumber of chirps per frame = {no_of_chirps}")
 
-        print("\nAntennas :")
+        print("\n Minimum Number of Antennas :")
         print(f"\tTX : {ntx}\n\tRX : {nrx}")
 
         print(f"\nTime of flight to target = {tof * 1e6:.2f} us")
@@ -144,8 +150,8 @@ def take_user_input():
     velocity_max = float(input("Maximum velocity (km/hr): "))
     velocity_res = float(input("Velocity resolution (km/hr): "))
     angular_res = float(input("Angular resolution (degrees): "))
-    frequency = float(input("Frequency (Hz): "))
-    return range_res, range_max, velocity_max, velocity_res, angular_res, frequency
+    frequency = float(input("Starting Frequency (GHz): "))
+    return range_res, range_max, velocity_max, velocity_res, angular_res, frequency*1e9
 
 
 # Function to process and display outputs for 3 cases
