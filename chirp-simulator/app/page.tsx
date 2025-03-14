@@ -174,14 +174,63 @@ export default function Home() {
           <div className="space-y-8">
             {/* Radar Diagram Image */}
             <div className="flex justify-center mb-8">
-              <Image
-                src="/images/radar-diagram.svg"
-                alt="Radar System Diagram"
-                width={1246}
-                height={687}
-                className="rounded-lg shadow-xl"
-                priority
-              />
+              <div className="relative">
+                <Image
+                  src="/images/radar-diagram.svg"
+                  alt="Radar System Diagram"
+                  width={1246}
+                  height={687}
+                  className="rounded-lg shadow-xl"
+                  priority
+                />
+                <svg
+                  className="absolute top-0 left-0"
+                  width="1246"
+                  height="687"
+                  style={{ pointerEvents: 'none' }}
+                >
+                  <text
+                    x="20"
+                    y="165"
+                    width="35"
+                    height="21"
+                    className="fill-current text-black"
+                    style={{ fontSize: '12px', fill: 'black' }}
+                  >
+                    {results[activeTab]?.chirpFrequency.end.toFixed(2)}
+                  </text>
+                  <text
+                    x="20"
+                    y="290"
+                    width="35"
+                    height="21"
+                    className="fill-current text-black"
+                    style={{ fontSize: '12px', fill: 'black' }}
+                  >
+                    {results[activeTab]?.chirpFrequency.center.toFixed(2)}
+                  </text>
+                  <text
+                    x="20"
+                    y="414"
+                    width="35"
+                    height="21"
+                    className="fill-current text-black"
+                    style={{ fontSize: '12px', fill: 'black' }}
+                  >
+                    {results[activeTab]?.chirpFrequency.start.toFixed(2)}
+                  </text>
+                  <text
+                    x="280"
+                    y="540"
+                    width="35"
+                    height="21"
+                    className="fill-current text-black"
+                    style={{ fontSize: '12px', fill: 'black' }}
+                  >
+                    {results[activeTab]?.chirpFrequency.center.toFixed(2)}
+                  </text>
+                </svg>
+              </div>
             </div>
 
             <div className="bg-gray-800/50 rounded-xl p-6 shadow-xl">
