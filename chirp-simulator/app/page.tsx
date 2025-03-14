@@ -250,44 +250,52 @@ export default function Home() {
                   {/* CHIRP Timing Parameters */}
                   <div>
                     <h3 className="text-2xl font-semibold mb-4 text-gray-300">CHIRP Timing Parameters</h3>
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                    <div className="grid grid-cols-4 gap-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">DC POWER ON DELAY TIME</div>
                         <div className="text-xl">{results[activeTab].timing.dc_power_delay.toFixed(2)} µs</div>
                       </div>
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">DWELL TIME</div>
                         <div className="text-xl">{results[activeTab].timing.dwell.toFixed(2)} µs</div>
                       </div>
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">SETTLE TIME</div>
                         <div className="text-xl">{results[activeTab].timing.settle.toFixed(2)} µs</div>
                       </div>
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">ACQUISITION TIME</div>
                         <div className="text-xl">{results[activeTab].timing.acquisition.toFixed(2)} µs</div>
                       </div>
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">RESET TIME</div>
                         <div className="text-xl">{results[activeTab].timing.reset.toFixed(2)} µs</div>
                       </div>
-                      <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="bg-gray-700/50 rounded-lg p-4">
                         <div className="text-gray-400 text-sm mb-1">JUMPBACK TIME</div>
                         <div className="text-xl">{results[activeTab].timing.jumpback.toFixed(2)} µs</div>
+                      </div>
+                      <div className="bg-gray-700/50 rounded-lg p-4">
+                        <div className="text-gray-400 text-sm mb-1">IDLE TIME</div>
+                        <div className="text-xl">{results[activeTab].timing.idle.toFixed(2)} µs</div>
+                      </div>
+                      <div className="bg-gray-700/50 rounded-lg p-4">
+                        <div className="text-gray-400 text-sm mb-1">CHIRP TIME</div>
+                        <div className="text-xl">{results[activeTab].timing.chirp.toFixed(2)} µs</div>
                       </div>
                     </div>
                   </div>
 
                   {/* Additional Parameters */}
-                  <div className="grid grid-cols-2 gap-8">
+                  <div className="space-y-8">
                     <div>
                       <h3 className="text-2xl font-semibold mb-4 text-gray-300">Frame Parameters</h3>
-                      <div className="space-y-4">
-                        <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-gray-700/50 rounded-lg p-4">
                           <div className="text-gray-400 text-sm mb-1">Frame Time</div>
                           <div className="text-xl">{results[activeTab].frame.time.toFixed(2)} ms</div>
                         </div>
-                        <div className="bg-gray-800/50 rounded-lg p-4">
+                        <div className="bg-gray-700/50 rounded-lg p-4">
                           <div className="text-gray-400 text-sm mb-1">Number of Chirps</div>
                           <div className="text-xl">{results[activeTab].frame.chirps}</div>
                         </div>
@@ -295,13 +303,27 @@ export default function Home() {
                     </div>
 
                     <div>
+                      <h3 className="text-2xl font-semibold mb-4 text-gray-300">Minimum Number of Antennas</h3>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-gray-700/50 rounded-lg p-4">
+                          <div className="text-gray-400 text-sm mb-1">TX</div>
+                          <div className="text-xl">{results[activeTab].antennas.tx}</div>
+                        </div>
+                        <div className="bg-gray-700/50 rounded-lg p-4">
+                          <div className="text-gray-400 text-sm mb-1">RX</div>
+                          <div className="text-xl">{results[activeTab].antennas.rx}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
                       <h3 className="text-2xl font-semibold mb-4 text-gray-300">Additional Information</h3>
-                      <div className="space-y-4">
-                        <div className="bg-gray-800/50 rounded-lg p-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-gray-700/50 rounded-lg p-4">
                           <div className="text-gray-400 text-sm mb-1">Time of Flight</div>
                           <div className="text-xl">{results[activeTab].timeOfFlight.toFixed(2)} µs</div>
                         </div>
-                        <div className="bg-gray-800/50 rounded-lg p-4">
+                        <div className="bg-gray-700/50 rounded-lg p-4">
                           <div className="text-gray-400 text-sm mb-1">Memory Required</div>
                           <div className="text-xl">{results[activeTab].memoryRequired.toFixed(2)} kilobits per frame</div>
                         </div>
