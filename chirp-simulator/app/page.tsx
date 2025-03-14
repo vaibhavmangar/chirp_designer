@@ -185,50 +185,125 @@ export default function Home() {
                 />
                 <svg
                   className="absolute top-0 left-0"
-                  width="1246"
-                  height="687"
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 1246 687"
+                  preserveAspectRatio="xMinYMin meet"
                   style={{ pointerEvents: 'none' }}
                 >
                   <text
-                    x="20"
-                    y="165"
-                    width="35"
-                    height="21"
+                    x="1.5%"
+                    y="29.5%"
                     className="fill-current text-black"
-                    style={{ fontSize: '12px', fill: 'black' }}
+                    style={{ fontSize: "100%", fill: 'black' }}
                   >
-                    {results[activeTab]?.chirpFrequency.end.toFixed(2)}
+                    {results[activeTab]?.chirpFrequency.end.toFixed(3)*1000}
                   </text>
                   <text
-                    x="20"
-                    y="290"
-                    width="35"
-                    height="21"
+                    x="1.5%"
+                    y="51.36%"
                     className="fill-current text-black"
-                    style={{ fontSize: '12px', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'black' }}
                   >
-                    {results[activeTab]?.chirpFrequency.center.toFixed(2)}
+                    {results[activeTab]?.chirpFrequency.center.toFixed(3)*1000}
                   </text>
                   <text
-                    x="20"
-                    y="414"
-                    width="35"
-                    height="21"
+                    x="1.5%"
+                    y="73.47%"
                     className="fill-current text-black"
-                    style={{ fontSize: '12px', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'black' }}
                   >
-                    {results[activeTab]?.chirpFrequency.start.toFixed(2)}
+                    {results[activeTab]?.chirpFrequency.start.toFixed(3)*1000}
                   </text>
                   <text
-                    x="280"
-                    y="540"
-                    width="35"
-                    height="21"
+                    x="6.5%"
+                    y="89.47%"
                     className="fill-current text-black"
-                    style={{ fontSize: '12px', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'black' }}
                   >
-                    {results[activeTab]?.chirpFrequency.center.toFixed(2)}
+                    {results[activeTab]?.timing.dc_power_delay.toFixed(2)}
                   </text>
+                  <text
+                    x="12.5%"
+                    y="89.47%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.timing.dwell.toFixed(2)}
+                  </text>
+                  <text
+                    x="16.5%"
+                    y="89.47%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.timing.settle.toFixed(2)}
+                  </text>
+                  <text
+                    x="23.5%"
+                    y="89.47%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.timing.acquisition.toFixed(2)}
+                  </text>
+                  <text
+                    x="29.5%"
+                    y="92%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.timing.jumpback.toFixed(2)}
+                  </text>
+                  <text
+                    x="35%"
+                    y="89.47%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.timing.reset.toFixed(2)}
+                  </text>
+                  <text
+                    x="40.5%"
+                    y="89.47%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.timing.idle.toFixed(2)}
+                  </text>
+                  <text
+                    x="45%"
+                    y="89.47%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.timing.dwell.toFixed(2)}
+                  </text>
+                  <text
+                    x="30%"
+                    y="96.47%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.timing.chirp.toFixed(2)}
+                  </text>
+                  <text
+                    x="52%"
+                    y="53.47%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.frame.chirps}
+                  </text>
+                  <text
+                    x="26%"
+                    y="55%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    {results[activeTab]?.chirpFrequency.bandwidth.toFixed(2)}
+                  </text>
+                  
                 </svg>
               </div>
             </div>

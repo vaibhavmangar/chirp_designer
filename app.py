@@ -52,8 +52,12 @@ class RadarSystem:
 
     def calculate_sweep_frequencies(self, sweep_bandwidth):
         sweep_frequency_start = self.frequency  
-        sweep_frequency_stop = self.frequency + sweep_bandwidth  
+        slope = self.calculate_slope(sweep_bandwidth, self.acquisition_time)
+        sweep_frequency_stop = self.frequency + sweep_bandwidth + slope*(self.JUMPBACK_TIME + self.SETTLE_TIME) 
         return sweep_frequency_start, sweep_frequency_stop
+
+    def calculate_slope(self, sweep_bandwidth, acquisition_time):
+        return sweep_bandwidth / acquisition_time
 
     def calculate_velocity_max_measurable(self):
         chirp_time_min = self.acquisition_time + self.DWELL_TIME + self.SETTLE_TIME + self.RESET_TIME+ self.JUMPBACK_TIME 
@@ -110,9 +114,10 @@ class RadarSystem:
 
         print("\n\nCHIRP Frequency Parameters")
         print(f"\tStarting frequency = {sweep_frequency_start / 1e9} GHz")
-        print(f"\tCenter frequency = {(sweep_frequency_start / 1e9)+(sweep_bandwidth / 2e9)} GHz")
+        print(f"\tCenter frequency = {(sweep_frequency_stop-sweep_frequency_start ) / 2e9} GHz")
         print(f"\tEnding frequency = {sweep_frequency_stop / 1e9} GHz")
-        print(f"\tCHIRP bandwidth = {sweep_bandwidth / 1e6} MHz")
+        print(f"\tCHIRP ADC bandwidth = {sweep_bandwidth / 1e6} MHz")
+        print(f"\tCHIRP Full bandwidth = {(sweep_frequency_stop-sweep_frequency_start ) / 1e6} MHz")
 
         print("\nCHIRP Timing Parameters : ")
         print(f"\tDC power on delay time = {self.DC_POWER_ON_DELAY_TIME * 1e6:.2f} us")
