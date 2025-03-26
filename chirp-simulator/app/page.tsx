@@ -195,7 +195,7 @@ export default function Home() {
                     x="1.5%"
                     y="29.5%"
                     className="fill-current text-black"
-                    style={{ fontSize: "100%", fill: 'black' }}
+                    style={{ fontSize: "100%", fill: 'Blue' }}
                   >
                     {results[activeTab]?.chirpFrequency.end.toFixed(3)*1000}
                   </text>
@@ -203,7 +203,7 @@ export default function Home() {
                     x="1.5%"
                     y="51.36%"
                     className="fill-current text-black"
-                    style={{ fontSize: '100%', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'Blue' }}
                   >
                     {((results[activeTab]?.chirpFrequency.end - results[activeTab]?.chirpFrequency.start) / 2 + results[activeTab]?.chirpFrequency.start).toFixed(3)*1000}
                   </text>
@@ -211,7 +211,7 @@ export default function Home() {
                     x="1.5%"
                     y="73.47%"
                     className="fill-current text-black"
-                    style={{ fontSize: '100%', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'Blue' }}
                   >
                     {results[activeTab]?.chirpFrequency.start.toFixed(3)*1000}
                   </text>
@@ -243,7 +243,7 @@ export default function Home() {
                     x="23.5%"
                     y="89.47%"
                     className="fill-current text-black"
-                    style={{ fontSize: '100%', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'Blue' }}
                   >
                     {results[activeTab]?.timing.acquisition.toFixed(2)}
                   </text>
@@ -267,7 +267,7 @@ export default function Home() {
                     x="40.5%"
                     y="89.47%"
                     className="fill-current text-black"
-                    style={{ fontSize: '100%', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'Blue' }}
                   >
                     {results[activeTab]?.timing.idle.toFixed(2)}
                   </text>
@@ -283,7 +283,7 @@ export default function Home() {
                     x="30%"
                     y="96.47%"
                     className="fill-current text-black"
-                    style={{ fontSize: '100%', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'Blue' }}
                   >
                     {results[activeTab]?.timing.chirp.toFixed(2)}
                   </text>
@@ -291,7 +291,7 @@ export default function Home() {
                     x="52%"
                     y="53.47%"
                     className="fill-current text-black"
-                    style={{ fontSize: '100%', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'Blue' }}
                   >
                     {results[activeTab]?.frame.chirps}
                   </text>
@@ -299,7 +299,7 @@ export default function Home() {
                     x="26%"
                     y="55%"
                     className="fill-current text-black"
-                    style={{ fontSize: '100%', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'Blue' }}
                   >
                     {results[activeTab]?.chirpFrequency.bandwidth.toFixed(2)}
                   </text>
@@ -307,11 +307,26 @@ export default function Home() {
                     x="32%"
                     y="55%"
                     className="fill-current text-black"
-                    style={{ fontSize: '100%', fill: 'black' }}
+                    style={{ fontSize: '100%', fill: 'Blue' }}
                   >
                     {((results[activeTab]?.chirpFrequency.end - results[activeTab]?.chirpFrequency.start) * 1000).toFixed(2)}
                   </text>
-                  
+                  <text
+                    x="75%"
+                    y="10%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'black' }}
+                  >
+                    Minimum No. of Tx & Rx :
+                  </text>
+                  <text
+                    x="91%"
+                    y="10%"
+                    className="fill-current text-black"
+                    style={{ fontSize: '100%', fill: 'Blue' }}
+                  >
+                    {results[activeTab]?.antennas.tx}, {results[activeTab]?.antennas.rx}
+                  </text>
                 </svg>
               </div>
             </div>
